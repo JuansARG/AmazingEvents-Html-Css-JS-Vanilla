@@ -2,16 +2,17 @@ let $main = document.querySelector("main");
 let id = new URLSearchParams(document.location.search).get("id");
 
 
-fetch('https://amazing-events.herokuapp.com/api/events')
+fetch('https://mindhub-xj03.onrender.com/api/amazing')
     .then(respuesta => respuesta.json())
     .then(datos => renderizarEventoDetallado(datos.events, id, $main))
     .catch(e => console.log(e));
 
 function renderizarEventoDetallado(eventos, idEvento, idContenedor) {
-    let eventoObjetivo = eventos.find(evento => evento._id === idEvento);
+    let eventoObjetivo = eventos.find(evento => evento._id == idEvento);
+    
     idContenedor.innerHTML += `<div class="container bg-dark p-0 d-flex flex-column gap-2 p-2 w-90 border border-5" id="contenedor-details">
                                 <img src=${eventoObjetivo.image} alt=${eventoObjetivo.name} title=${eventoObjetivo.name} width="100%">
-                                <div class="">
+                                <div>
                                     <h2 class="text-light text-center fs-1 pb-2"> ${eventoObjetivo.name}</h2>
                                     <p class="text-light fs-4"> ${eventoObjetivo.description}</p>
                                     <p class="text-light fs-4">Date: ${eventoObjetivo.date}</p>
